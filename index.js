@@ -4,11 +4,9 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
-const path = require('path');
 var Multer = require("multer");
 var amqp = require('amqplib/callback_api');
-const util = require('util');
-const { exec } = require("child_process");
+const exec = require('util').promisify(require('child_process').exec);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
