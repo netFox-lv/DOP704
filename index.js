@@ -68,3 +68,4 @@ function listRabbitMQ() {
     });
 }
 
+getCarNumber();
