@@ -2,7 +2,7 @@ const minioClient = require('./minio-configuration');
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = 8000;
 const bodyParser = require('body-parser');
 var Multer = require("multer");
 var amqp = require('amqplib/callback_api');
