@@ -63,7 +63,7 @@ async function getCarNumber(car_image){
 }
 
 function listRabbitMQ() {
-    amqp.connect('amqp://127.0.0.1:5672', function(error0, connection) {
+    amqp.connect('amqp://192.168.0.192:5672', function(error0, connection) {
         if (error0) throw error0;
         connection.createChannel(function(error1, channel) {
             if (error1) {
