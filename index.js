@@ -32,17 +32,25 @@ app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), 
             console.log("[MINIO] File successfully uploaded!");
             response.send("[MINIO] File successfully uploaded!");
         });
+        listRabbitMQ();
 });
 
-async function getCarNumber(){
+async function dowloadImage(){
+
+}
+async function getCarNumber(car_image){
     let result ="";
     try {
 
-      const {stdout, stderr} = await exec ('alpr -c eu -p lv -j h786poj.jpg');
-         let tesOut = JSON.parse(stdout.toString())
+      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j DOP704/image/${car_image}`);
+         let tesOut = JSON.parse(stdout.toString());
 
-        console.log(tesOut.results[0].plate);
-
+        if (tesOut.results.length >0){
+            console.log("[OpenALPR] Result: "+tesOut.results[0].plate);
+            result = tesOut.results[0].plate;
+        }else{
+            result ="[OpenALPR] Cannot Find any car number!"
+        }
 
     } catch (e){
         console.log("[OpenALPR] Error:\n"+e)
@@ -61,9 +69,20 @@ function listRabbitMQ() {
             if (error1) {
                 throw error1;
             }
-                var queue = "car_in"
+                var queue = "car_in";
+            channel.assertQueue(queue,{
+                durable: true
+            });
+            console.log("[RabbitMQ] Waiting for messages in %s. To exit press CTRL+C", queue);
+            channel.consume(queue, function(msg) {
+                console.log("[RabbitMQ] Received %s", msg.content.toString());
 
+
+
+
+            }, {
+                noAck: true
+            });
         });
     });
 }
-getCarNumber()
