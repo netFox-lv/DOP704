@@ -8,7 +8,7 @@ const path = require('path');
 var Multer = require("multer");
 var amqp = require('amqplib/callback_api');
 const util = require('util');
-const exec = util.promisify(require('child_process').exec)
+const { exec } = require("child_process");
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -40,7 +40,7 @@ async function getCarNumber(){
     let result ="";
     try {
 
-        const {stdout,stderr} = await exec ('alpr -c eu -p lv -j h786poj.jpg');
+        exec ('alpr -c eu -p lv -j h786poj.jpg');
 
 
 
@@ -67,5 +67,4 @@ function listRabbitMQ() {
         });
     });
 }
-
-exec ('alpr -c eu -p lv -j h786poj.jpg');
+getCarNumber()
