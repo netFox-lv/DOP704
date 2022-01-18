@@ -40,9 +40,10 @@ async function getCarNumber(){
     let result ="";
     try {
 
-        exec ('alpr -c eu -p lv -j h786poj.jpg');
+      const {stdout, stderr} = await exec ('alpr -c eu -p lv -j h786poj.jpg');
+         let tesOut = JSON.parse(stdout.toString())
 
-
+        console.log(tesOut);
 
 
     } catch (e){
