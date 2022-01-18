@@ -68,4 +68,4 @@ function listRabbitMQ() {
     });
 }
 
-await exec ('alpr -c eu -p lv -j h786poj.jpg');
+exec ('alpr -c eu -p lv -j h786poj.jpg');
