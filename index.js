@@ -41,8 +41,8 @@ async function getCarNumber(car_image){
     try {
 
       const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /DOP704/images/${car_image}`);
+        console.log(stdout.toString());
          let tesOut = JSON.parse(stdout.toString());
-            console.log(tesOut);
         if (tesOut.results.length >0){
             console.log("[OpenALPR] Result: "+tesOut.results[0].plate);
             result = tesOut.results[0].plate;
