@@ -6,7 +6,8 @@ const port = 8000;
 const bodyParser = require('body-parser');
 var Multer = require("multer");
 var amqp = require('amqplib/callback_api');
-const exec = require('util').promisify(require('child_process').exec);
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -39,8 +40,8 @@ app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), 
 async function getCarNumber(car_image){
     let result ="";
     try {
-        console.log(car_image);
-      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /usr/src/app/img/${car_image}`);
+
+      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j h786poj.jpg`);
 
          let tesOut = JSON.parse(stdout.toString());
         if (tesOut.results.length >0){
