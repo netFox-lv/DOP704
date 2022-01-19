@@ -24,15 +24,15 @@ minioClient.makeBucket('cars', function (err) {
     console.log('[MINIO] Bucket created successfully')
 });
 
-app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), function(request, response) {
-        minioClient.putObject("cars", request.file.originalname, request.file.buffer, function (error, etag) {
-            if (error) {
-                return console.log("[MINIO] Error:\n"+error);
-            }
-            console.log("[MINIO] File successfully uploaded!");
-            response.send("[MINIO] File successfully uploaded!");
-        });
-        openChannel(request.file.originalname);
+app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), async function (request, response) {
+    await minioClient.putObject("cars", request.file.originalname, request.file.buffer, function (error, etag) {
+        if (error) {
+            return console.log("[MINIO] Error:\n" + error);
+        }
+        console.log("[MINIO] File successfully uploaded!");
+        response.send("[MINIO] File successfully uploaded!");
+    });
+    openChannel(request.file.originalname);
 });
 
 async function getCarNumber(car_image){
