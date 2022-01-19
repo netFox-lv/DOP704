@@ -40,7 +40,7 @@ app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), 
 async function getCarNumber(car_image){
     let result ="";
     try {
-        console.log(`alpr -c eu -p lv -j /images/${car_image}`);
+
       const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /images/${car_image}`);
 
          let tesOut = JSON.parse(stdout.toString());
