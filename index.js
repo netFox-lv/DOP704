@@ -1,5 +1,5 @@
 const minioClient = require('./minio-configuration');
-const redisClient = require('./redis-configuration');
+
 
 const express = require('express');
 const app = express();
@@ -10,6 +10,11 @@ const amqp = require('amqplib/callback_api');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
+
+const redis = require('redis');
+const redisClient = redis.createClient({
+    url: 'redis://127.0.0.1:6379'
+});
 
 redisClient.on('error', err => {
     console.log('[REDIS] Error ' + err);
