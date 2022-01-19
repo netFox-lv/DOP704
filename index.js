@@ -123,6 +123,7 @@ async function setCar(plate_number){
     let parking_list = await redisClient.hGetAll('parking');
 
     if(!parking_list || (!plate_number in parking_list)){
+        console.log("here");
         await redisClient.hSet('parking',plate_number,moment.format('YYYY-MM-DD HH:MM:SS'));
         console.log("Plate Number:"+plate_number+"\nTime: "+moment.format('YYYY-MM-DD HH:MM:SS'));
             return {
