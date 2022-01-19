@@ -27,7 +27,7 @@ minioClient.makeBucket('cars', function (err) {
 app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), function(request, response) {
         minioClient.putObject("cars", request.file.originalname, request.file.buffer, function (error, etag) {
             if (error) {
-                return console.log(error);
+                return console.log("[MINIO] Error:\n"+error);
             }
             console.log("[MINIO] File successfully uploaded!");
             response.send("[MINIO] File successfully uploaded!");
@@ -42,7 +42,7 @@ async function getCarNumber(car_image){
     let result ="";
     try {
 
-      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j DOP704/image/${car_image}`);
+      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j DOP704/images/${car_image}`);
          let tesOut = JSON.parse(stdout.toString());
 
         if (tesOut.results.length >0){
@@ -78,7 +78,17 @@ function listRabbitMQ() {
                 console.log("[RabbitMQ] Received %s", msg.content.toString());
 
                 let car_image = msg.content.toString();
-                console.log(car_image);
+
+                minioClient.getObject("cars", car_image, async function (error, stream) {
+                    if (error) {
+                        return console.log("[MINIO] Error:\n" + error)
+                    }
+
+                    let finded_car_number = await getCarNumber(car_image);
+
+                    console.log(finded_car_number);
+
+                });
 
 
             }, {
