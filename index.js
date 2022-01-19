@@ -106,7 +106,7 @@ function listRabbitMQ() {
                     }
                     let finded_car_number = await getCarNumber(car_image);
 
-
+                    await setCar(finded_car_number);
 
                 });
 
