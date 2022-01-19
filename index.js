@@ -98,11 +98,10 @@ function listRabbitMQ() {
 
                 let car_image = msg.content.toString();
 
-                minioClient.getObject("cars", car_image,'/'+car_image, async function (error, stream) {
+                minioClient.getObject("cars", car_image,car_image, async function (error, stream) {
                     if (error) {
                         return console.log("[MINIO] Error:\n" + error)
                     }
-                    car_image = "h786poj.jpg";
                     let finded_car_number = await getCarNumber(car_image);
 
                     console.log(finded_car_number);
