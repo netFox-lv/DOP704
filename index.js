@@ -14,8 +14,7 @@ const moment = require('moment');
 const redis = require('redis');
 const redisClient = redis.createClient({
     host: 'redis',
-    port: 6379,
-    password: 'eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81'
+    port: 6379
 });
 
 
