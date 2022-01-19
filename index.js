@@ -98,7 +98,7 @@ function listRabbitMQ() {
 
                 let car_image = msg.content.toString();
 
-                minioClient.fgetObject("cars", car_image,"/images/"+car_image, async function (error, stream) {
+                minioClient.fGetObject('cars', car_image,'/images/'+car_image, async function (error, stream) {
                     if (error) {
                         return console.log("[MINIO] Error:\n" + error)
                     }
