@@ -39,9 +39,9 @@ app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), 
 async function getCarNumber(car_image){
     let result ="";
     try {
+        console.log(car_image);
+      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /usr/src/app/img/${car_image}`);
 
-      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /DOP704/images/${car_image}`);
-        console.log(stdout.toString());
          let tesOut = JSON.parse(stdout.toString());
         if (tesOut.results.length >0){
             console.log("[OpenALPR] Result: "+tesOut.results[0].plate);
@@ -97,7 +97,7 @@ function listRabbitMQ() {
 
                 let car_image = msg.content.toString();
 
-                minioClient.getObject("cars", car_image,'/DOP704/images/'+car_image, async function (error, stream) {
+                minioClient.getObject("cars", car_image,'/usr/src/app/img/'+car_image, async function (error, stream) {
                     if (error) {
                         return console.log("[MINIO] Error:\n" + error)
                     }
