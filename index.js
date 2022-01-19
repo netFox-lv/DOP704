@@ -17,8 +17,6 @@ const redisClient = redis.createClient({
 });
 
 
-
-
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
@@ -127,11 +125,7 @@ function listRabbitMQ() {
 
 async function setCar(plate_number){
 
-    if(!redisClient.isOpen) await function() {
-        redisClient.on('error', err => {
-            console.log('[REDIS] Error ' + err);
-        });
-    }
+    if(!redisClient.isOpen) await redisClient.connect();
     let parking_list = await redisClient.hGetAll('parking');
 
     if(!parking_list || (!plate_number in parking_list)){
