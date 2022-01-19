@@ -11,6 +11,10 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
+redisClient.on('error', err => {
+    console.log('[REDIS] Error ' + err);
+});
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
