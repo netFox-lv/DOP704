@@ -77,7 +77,8 @@ function listRabbitMQ() {
             channel.consume(queue, function(msg) {
                 console.log("[RabbitMQ] Received %s", msg.content.toString());
 
-
+                let car_image = msg.content.toString();
+                console.log(car_image);
 
 
             }, {
