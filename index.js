@@ -87,7 +87,7 @@ function listRabbitMQ() {
                 throw error1;
             }
 
-
+            var queue = "car_drive_in";
             channel.assertQueue(queue,{
                 durable: true
             });
