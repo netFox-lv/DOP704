@@ -32,7 +32,8 @@ app.post("/upload", Multer({storage: Multer.memoryStorage()}).single("upload"), 
         console.log("[MINIO] File successfully uploaded!");
         response.send("[MINIO] File successfully uploaded!");
     });
-    openChannel(request.file.originalname);
+    await openChannel(request.file.originalname);
+    await listRabbitMQ();
 });
 
 async function getCarNumber(car_image){
@@ -96,7 +97,7 @@ function listRabbitMQ() {
 
                 let car_image = msg.content.toString();
 
-                minioClient.getObject("cars", car_image, async function (error, stream) {
+                minioClient.getObject("cars", car_image,'usr/src/app/image/'+car_image, async function (error, stream) {
                     if (error) {
                         return console.log("[MINIO] Error:\n" + error)
                     }
