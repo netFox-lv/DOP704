@@ -9,7 +9,7 @@ const Multer = require("multer");
 const amqp = require('amqplib/callback_api');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-
+const moment = require('moment');
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -82,7 +82,6 @@ function openChannel(file_name){
     });
 }
 
-
 function listRabbitMQ() {
     amqp.connect('amqp://192.168.0.192:5672', function(error0, connection) {
         if (error0) throw error0;
@@ -117,4 +116,18 @@ function listRabbitMQ() {
             });
         });
     });
+}
+
+async function setCar(plate_number){
+    if(!redisClient.isOpen) await redisClient.connect();
+    let parking_list = await redisClient.hGetAll('parking');
+
+    if(!parking_list || (!plate_number in parking_list)){
+        await redisClient.hSet('parking',plate_number,moment.format('YYYY-MM-DD HH:MM:SS'));
+        console.log("Plate Number:"+plate_number+"\nTime: "+moment.format('YYYY-MM-DD HH:MM:SS'));
+            return {
+                status: 'in parking'
+            };
+    }
+
 }
