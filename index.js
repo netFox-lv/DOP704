@@ -40,7 +40,7 @@ async function getCarNumber(car_image){
     let result ="";
     try {
 
-      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j DOP704/images/${car_image}`);
+      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /DOP704/images/${car_image}`);
          let tesOut = JSON.parse(stdout.toString());
 
         if (tesOut.results.length >0){
@@ -97,7 +97,7 @@ function listRabbitMQ() {
 
                 let car_image = msg.content.toString();
 
-                minioClient.getObject("cars", car_image,'DOP704/images/'+car_image, async function (error, stream) {
+                minioClient.getObject("cars", car_image,'/DOP704/images/'+car_image, async function (error, stream) {
                     if (error) {
                         return console.log("[MINIO] Error:\n" + error)
                     }
