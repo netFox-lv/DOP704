@@ -12,9 +12,7 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const redis = require('redis');
-const redisClient = redis.createClient({
-    url: 'redis://192.168.0.192:6379'
-});
+const redisClient = redis.createClient();
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
