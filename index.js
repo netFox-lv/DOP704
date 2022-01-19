@@ -1,13 +1,16 @@
 const minioClient = require('./minio-configuration');
+const redisClient = require('./redis-configuration');
 
 const express = require('express');
 const app = express();
 const port = 8000;
 const bodyParser = require('body-parser');
-var Multer = require("multer");
-var amqp = require('amqplib/callback_api');
+const Multer = require("multer");
+const amqp = require('amqplib/callback_api');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -104,7 +107,7 @@ function listRabbitMQ() {
                     }
                     let finded_car_number = await getCarNumber(car_image);
 
-                    console.log(finded_car_number);
+
 
                 });
 
