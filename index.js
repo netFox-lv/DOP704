@@ -119,7 +119,7 @@ function listRabbitMQ() {
 }
 
 async function setCar(plate_number){
-    console.log("here1");
+    console.log(redisClient.isOpen);
     if(!redisClient.isOpen) await redisClient.connect();
     let parking_list = await redisClient.hGetAll('parking');
 
