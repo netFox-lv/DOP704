@@ -138,7 +138,6 @@ async function setCar(plate_number){
       }
 
       let result = await collection.findOne(query);
-
       if (result == null) {
           query = {
               car_plate: plate_number,
@@ -159,9 +158,10 @@ async function setCar(plate_number){
             result = await collection.updateOne(filter,query);
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
 
-            const cursor = collection.findOne({car_plate: plate_number})
-           const allValues = await cursor.toArray();
-            console.log(allValues);
+            const time_result = collection.findOne({car_plate: plate_number})
+                if (result) {
+                    console.log(time_result);
+                }
 
           let testAccount = await nodemailer.createTestAccount();
             let transporter = nodemailer.createTransport({
