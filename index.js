@@ -160,8 +160,8 @@ async function setCar(plate_number){
 
             const time_result = await collection.findOne({car_plate: plate_number})
                 if (time_result) {
-                    var startDate = moment(time_result.time_in, 'YYYY-M-DD HH:mm:ss');
-                    var endDate = moment(time_result.time_out, 'YYYY-M-DD HH:mm:ss');
+                    var startDate = moment(time_result.time_in, 'DD.MM.YYYY HH:mm:ss');
+                    var endDate = moment(time_result.time_out, 'DD.MM.YYYY HH:mm:ss');
                     var secondsDiff = endDate.diff(startDate, 'minutes')
                 }
                 console.log(secondsDiff);
