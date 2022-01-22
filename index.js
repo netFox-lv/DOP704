@@ -152,7 +152,7 @@ async function setCar(plate_number){
             }
             query = {
                 $set: {
-                    time_out: moment().format('DD.MM.YYYY HH:mm:ss')
+                    time_out: moment().format()
                 },
             }
             result = await collection.updateOne(filter,query);
@@ -160,8 +160,8 @@ async function setCar(plate_number){
 
             const time_result = await collection.findOne({car_plate: plate_number})
                 if (time_result) {
-                    var startDate = moment(time_result.time_in,'DD.MM.YYYY HH:mm:ss');
-                    var endDate = moment(time_result.time_out,'DD.MM.YYYY HH:mm:ss');
+                    var startDate = moment(time_result.time_in);
+                    var endDate = moment(time_result.time_out);
                     var secondsDiff = endDate.diff(startDate,'minutes');
                 }
                 console.log(secondsDiff);
