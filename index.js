@@ -128,30 +128,9 @@ async function setCar(plate_number){
     try {
 
         var db = client.db("parking");
-        await client.connect();
+        await db.connect();
+            console.log("ok");
 
-        db.collection("test").findOne({car_number : plate_number},function (err,res){
-            if (err)  {
-                var object = {
-                    car_number: plate_number,
-                    time_in: moment().format('dd MM YYYY, hh:mm:ss')
-                }
-                db.collection("test").insertOne(object),function(err,res) {
-                    if (err) {
-                        console.log("[MongoDB] Error:\n" + err);
-                    }
-                    console.log("[MongoDB] Line was added!")
-                }
-            }
-            var object = {
-                car_number: plate_number
-            }
-            var update = {
-                car_number: plate_number,
-                time_out: moment().format('dd MM YYYY, hh:mm:ss')
-            }
-            db.collection("test").updateOne(object,update)
-        })
 
 
     } catch (e) {
