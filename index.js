@@ -186,6 +186,12 @@ async function setCar(plate_number){
                   console.log("[E-Mail] Message sent: %s", info.messageId);
               }
           })
+          result = await collection.deleteOne(filter);
+          if (result.deletedCount === 1){
+              console.log("[MongoDB] Successfully deleted! ")
+          }else {
+              console.log("[MongoDB] No documents matched the query! ")
+          }
       }
 
     } catch (e) {
