@@ -179,7 +179,7 @@ async function setCar(plate_number){
               text: `Your car - ${plate_number}. Spent time - ${Math.round(secondsDiff.asMinutes()*100)/100}`, // plain text body
           };
 
-          transporter.sendMail(info,function (err,info){
+         await transporter.sendMail(info,function (err,info){
               if (err) {
                   console.log("[E-Mail] Error:\n"+err)
               }else{
