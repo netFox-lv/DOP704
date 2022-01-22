@@ -11,8 +11,13 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
+const username = encodeURIComponent("admin");
+const password = encodeURIComponent("admin");
+const clusterUrl = "mongo";
+const authMechanism = "DEFAULT";
+
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://admin:admin@mongo:27017/?maxPoolSize=20&w=majority";
+const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=${authMechanism}`;
 const client = new MongoClient(uri);
 
 
