@@ -159,8 +159,8 @@ async function setCar(plate_number){
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
 
             const time_result = await collection.findOne({car_plate: plate_number})
-                if (result) {
-                    console.log(JSON.parse(result));
+                if (time_result) {
+                    console.log(typeof time_result);
                 }
 
           let testAccount = await nodemailer.createTestAccount();
