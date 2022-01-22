@@ -134,7 +134,7 @@ async function setCar(plate_number){
             if (err)  {
                 var object = {
                     car_number: plate_number,
-                    time_in: moment.format('dd MM YYYY, hh:mm:ss')
+                    time_in: moment().formate('dd MM YYYY, hh:mm:ss')
                 }
                 db.collection("test").insertOne(object),function(err,res) {
                     if (err) {
@@ -148,7 +148,7 @@ async function setCar(plate_number){
             }
             var update = {
                 car_number: plate_number,
-                time_out: moment.format('dd MM YYYY, hh:mm:ss')
+                time_out: moment().format('dd MM YYYY, hh:mm:ss')
             }
             db.collection("test").updateOne(object,update)
         })
