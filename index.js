@@ -127,11 +127,17 @@ async function setCar(plate_number){
 
     try {
 
-        var db = client.db("parking");
-        await db.connect();
-            console.log("ok");
+      await client.connect();
+      const db = client.db('parking');
+      const collection = db.collection('drive_in');
 
+      const query = {
+          car_plate : plate_number
+      }
 
+      const result = await collection.findOne(query);
+
+      console.log(result);
 
     } catch (e) {
         console.log("[MongoDB] Error:\n" + e);
