@@ -13,11 +13,11 @@ const moment = require('moment');
 
 const username = encodeURIComponent("admin");
 const password = encodeURIComponent("admin");
-const clusterUrl = "192.168.0.198";
+const clusterUrl = "mongo";
 const authMechanism = "DEFAULT";
 
 const { MongoClient } = require("mongodb");
-const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=${authMechanism}`;
+const uri = `mongodb+srv://${username}:${password}@${clusterUrl}:27017/?authMechanism=${authMechanism}`;
 const client = new MongoClient(uri);
 
 
