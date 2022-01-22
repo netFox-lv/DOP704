@@ -140,14 +140,17 @@ async function setCar(plate_number){
       if (result == null) {
           query = {
               car_plate: plate_number,
-              time_in: moment().format(''),
+              time_in: moment().format('DD.MM.YYYY HH:mm:ss'),
               time_out: ''
           }
            result = await collection.insertOne(query);
            console.log(`[MongoDB] Row was inserted -  ${result.insertedId}`);
-           console.log(result);
       } else {
-
+            query = {
+                car_plate: plate_number,
+                time_out: moment().format('DD.MM.YYYY HH:mm:ss')
+            }
+            
       }
 
     } catch (e) {
