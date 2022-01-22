@@ -11,9 +11,11 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://192.168.0.198:27017/';
-const client = new MongoClient(url);
+const { MongoClient } = require("mongodb");
+const uri =
+    "mongodb+srv://192.168.0.198:27017/?maxPoolSize=20&w=majority";
+// Create a new MongoClient
+const client = new MongoClient(uri);
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
