@@ -162,7 +162,7 @@ async function setCar(plate_number){
                 if (time_result) {
                     var startDate = moment(time_result.time_in, 'YYYY-M-DD HH:mm:ss');
                     var endDate = moment(time_result.time_out, 'YYYY-M-DD HH:mm:ss');
-                    var secondsDiff = endDate.diff(startDate, 'seconds')
+                    var secondsDiff = endDate.diff(startDate, 'minutes')
                 }
                 console.log(secondsDiff);
           let testAccount = await nodemailer.createTestAccount();
