@@ -17,7 +17,7 @@ const clusterUrl = "mongo";
 const authMechanism = "DEFAULT";
 
 const { MongoClient } = require("mongodb");
-const uri = `mongodb+srv://${username}:${password}@${clusterUrl}:27017/?authMechanism=${authMechanism}`;
+const uri = `mongodb+srv://${username}:${password}@${clusterUrl}/?authMechanism=${authMechanism}`;
 const client = new MongoClient(uri);
 
 
