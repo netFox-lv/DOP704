@@ -181,7 +181,7 @@ async function setCar(plate_number){
 
           transporter.sendMail(info,function (err,info){
               if (err) {
-                  console.log("[E-Mail] Error:\n"+e)
+                  console.log("[E-Mail] Error:\n"+err)
               }else{
                   console.log("[E-Mail] Message sent: %s", info.messageId);
               }
