@@ -129,9 +129,18 @@ async function setCar(plate_number){
         await client.connect();
 
         let databasesList = await client.db().admin().listDatabases();
+        let isExits = true;
+        console.log("[MongoDB] Databases:");
+        databasesList.databases.forEach(db => {
+            if (db =="parking") {
+                console.log("OK")
+            } else {
+                isExits=false;
+            }
+            console.log(` - ${db.name}`)
+        })
+        console.log(isExits);
 
-        console.log("Databases:");
-        databasesList.databases.forEach(db => console.log(` - ${db.name}`))
     } catch (e) {
         console.log("[MongoDB] Error:\n" + e);
     } finally {
