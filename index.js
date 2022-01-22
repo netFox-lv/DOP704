@@ -137,7 +137,9 @@ async function setCar(plate_number){
 
       const result = await collection.findOne(query);
 
-      console.log(result);
+      if (result == null) {
+          console.log("Empty")
+      }
 
     } catch (e) {
         console.log("[MongoDB] Error:\n" + e);
