@@ -174,8 +174,8 @@ async function setCar(plate_number){
           });
           let info = {
               from: 'dop704test@gmail.com', // sender address
-              to: "dop704test@gmail.com", // list of receivers
-              subject: "Parking Latvia ✔", // Subject line
+              to: 'dop704test@gmail.com', // list of receivers
+              subject: 'Parking Latvia ✔', // Subject line
               text: `Your car - ${plate_number}. Spent time - ${secondsDiff.asMinutes()}`, // plain text body
           };
 
