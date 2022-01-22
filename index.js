@@ -145,6 +145,7 @@ async function setCar(plate_number){
           }
            result = await collection.insertOne(query);
            console.log(`[MongoDB] Row was inserted -  ${result.insertedId}`);
+           console.log(result);
       } else {
 
       }
