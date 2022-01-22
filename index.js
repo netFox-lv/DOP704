@@ -12,9 +12,9 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const { MongoClient } = require("mongodb");
-const uri ="mongodb+srv://127.0.0.1/?maxPoolSize=20&w=majority";
+const uri ="mongodb://192.168.0.198:27017";
 // Create a new MongoClient
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri);
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
