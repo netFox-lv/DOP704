@@ -160,7 +160,7 @@ async function setCar(plate_number){
 
             const time_result = await collection.findOne({car_plate: plate_number})
                 if (result) {
-                    console.log(time_result);
+                    console.log(result.time_in);
                 }
 
           let testAccount = await nodemailer.createTestAccount();
