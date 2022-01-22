@@ -164,7 +164,6 @@ async function setCar(plate_number){
                     var endDate = moment(time_result.time_out);
                     var secondsDiff = moment.duration(endDate.diff(startDate,true));
                 }
-                console.log();
           let testAccount = await nodemailer.createTestAccount();
             let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
@@ -182,7 +181,13 @@ async function setCar(plate_number){
               text: `Your car - ${plate_number}. Spended time - ${secondsDiff.asMinutes()}`, // plain text body
           });
 
-          console.log("[E-MAIL] Message sent: %s", info.messageId);
+          transporter.sendMail(info,function (err,info){
+              if (err) {
+                  console.log("[E-Mail] Error:\n"+e)
+              }else{
+                  console.log("[E-Mail] Message sent: %s", info.messageId);
+              }
+          })
       }
 
     } catch (e) {
