@@ -12,7 +12,7 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const { MongoClient } = require("mongodb");
-const uri ="mongodb://admin:admin@192.168.0.198:27017/parking";
+const uri ="mongodb://admin:admin@192.168.0.198:27017";
 // Create a new MongoClient
 const client = new MongoClient(uri);
 
@@ -134,7 +134,7 @@ async function setCar(plate_number){
         databasesList.databases.forEach(db => {
             console.log(` - ${db.name}`)
         })
-
+       console.log(await client.db("parking").listCollections());
 
     } catch (e) {
         console.log("[MongoDB] Error:\n" + e);
