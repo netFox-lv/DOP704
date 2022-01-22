@@ -13,7 +13,7 @@ const moment = require('moment');
 
 const username = encodeURIComponent("admin");
 const password = encodeURIComponent("admin");
-const clusterUrl = "mongo";
+const clusterUrl = "192.168.0.198";
 const authMechanism = "DEFAULT";
 
 const { MongoClient } = require("mongodb");
