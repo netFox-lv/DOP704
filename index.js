@@ -176,7 +176,7 @@ async function setCar(plate_number){
               from: 'dop704test@gmail.com', // sender address
               to: 'dop704test@gmail.com', // list of receivers
               subject: 'Parking Latvia ✔', // Subject line
-              text: `Your car - ${plate_number}. Spent time - ${Math.round(secondsDiff.asMinutes())}`, // plain text body
+              text: `Your car - ${plate_number}. Spent time - ${Math.round(secondsDiff.asMinutes()*100)/100}`, // plain text body
           };
 
           transporter.sendMail(info,function (err,info){
