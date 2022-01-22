@@ -11,10 +11,6 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
-const redis = require('redis');
-const redisClient = redis.createClient({
-    url: 'redis://redis:6379'
-});
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -125,17 +121,5 @@ function listRabbitMQ() {
 
 async function setCar(plate_number){
 
-    if(!redisClient.isOpen) await redisClient.connect();
-
-    let parking_list = await redisClient.hGetAll('parking');
-
-    if(!parking_list || (!plate_number in parking_list)){
-        console.log("here");
-        await redisClient.hSet('parking',plate_number,moment.format('YYYY-MM-DD HH:MM:SS'));
-        console.log("Plate Number:"+plate_number+"\nTime: "+moment.format('YYYY-MM-DD HH:MM:SS'));
-            return {
-                status: 'in parking'
-            };
-    }
 
 }
