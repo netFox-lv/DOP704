@@ -12,7 +12,7 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const { MongoClient } = require("mongodb");
-const uri ="mongodb://192.168.0.198:27017";
+const uri ="mongodb://mongo:27017";
 // Create a new MongoClient
 const client = new MongoClient(uri);
 
@@ -127,11 +127,14 @@ async function setCar(plate_number){
 
     try {
         await client.connect();
-        await client.db("admin").command({ping:1});
-        console.log("[MongoDB] Connected successfully");
-    } catch (e){
-        console.log("[MongoDB] Error:\n"+e);
-    }finally {
+
+       let databasesList = await client.db().admin().listDatabases();
+
+        console.log("Databases:");
+        databasesList.databases.forEach(db => console.log(` - ${db.name}`))
+    } catch (e) {
+        console.log("[MongoDB] Error:\n" + e);
+    } finally {
         await client.close();
     }
 
