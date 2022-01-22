@@ -160,9 +160,9 @@ async function setCar(plate_number){
 
             const time_result = await collection.findOne({car_plate: plate_number})
                 if (time_result) {
-                    console.log(time_result.time_out);
+                    let time_diff = time_result.time_out.diff(time_result.time_in, 'seconds') ;
                 }
-
+                console.log(time_diff);
           let testAccount = await nodemailer.createTestAccount();
             let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
