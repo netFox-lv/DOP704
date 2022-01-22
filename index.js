@@ -158,7 +158,7 @@ async function setCar(plate_number){
             result = await collection.updateOne(filter,query);
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
 
-            const time_result = collection.findOne({car_plate: plate_number})
+            const time_result = await collection.findOne({car_plate: plate_number})
                 if (result) {
                     console.log(time_result);
                 }
