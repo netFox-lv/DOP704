@@ -12,7 +12,7 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://192.168.0.198:27017';
+const url = 'mongodb://admin:admin@mongo:27017/';
 const client = new MongoClient(url);
 
 
