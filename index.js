@@ -126,9 +126,9 @@ function listRabbitMQ() {
 async function setCar(plate_number){
 
     try {
-        await client.connect();
 
         var db = client.db("parking");
+        await client.connect();
 
         db.collection("test").findOne({car_number : plate_number},function (err,res){
             if (err)  {
