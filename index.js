@@ -164,7 +164,7 @@ async function setCar(plate_number){
                     var endDate = moment(time_result.time_out);
                     var secondsDiff = startDate.diff(endDate,'hours');
                 }
-                console.log(secondsDiff.asHours());
+                console.log(secondsDiff);
           let testAccount = await nodemailer.createTestAccount();
             let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
