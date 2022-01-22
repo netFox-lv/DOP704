@@ -146,11 +146,16 @@ async function setCar(plate_number){
            result = await collection.insertOne(query);
            console.log(`[MongoDB] Row was inserted -  ${result.insertedId}`);
       } else {
-            query = {
-                car_plate: plate_number,
-                time_out: moment().format('DD.MM.YYYY HH:mm:ss')
+            const filter = {
+                car_plate: plate_number
             }
-            
+            query = {
+                $set: {
+                    time_out: moment().format('DD.MM.YYYY HH:mm:ss')
+                },
+            }
+            result = await collection.updateOne(filter,query);
+            console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
       }
 
     } catch (e) {
