@@ -131,14 +131,22 @@ async function setCar(plate_number){
       const db = client.db('parking');
       const collection = db.collection('drive_in');
 
-      const query = {
+      let query = {
           car_plate : plate_number
       }
 
-      const result = await collection.findOne(query);
+      let result = await collection.findOne(query);
 
       if (result == null) {
-          console.log("Empty")
+          query = {
+              car_plate: plate_number,
+              time_in: moment().format(''),
+              time_out: ''
+          }
+           result = await collection.insertOne(query);
+           console.log(`[MongoDB] Row was inserted -  ${result.insertedId}`);
+      } else {
+
       }
 
     } catch (e) {
