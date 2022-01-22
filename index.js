@@ -158,7 +158,11 @@ async function setCar(plate_number){
             }
             result = await collection.updateOne(filter,query);
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
-            console.log(result)
+
+            const cursor = collection.findOne({car_plate: plate_number})
+            for await (const  doc of cursor){
+                console.log(doc);
+            }
             let testAccount = await nodemailer.createTestAccount();
             let transporter = nodemailer.createTransport({
                 host: "smtp.ethereal.email",
