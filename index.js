@@ -10,6 +10,8 @@ const amqp = require('amqplib/callback_api');
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
+const nodemailer = require("nodemailer");
+
 
 const { MongoClient } = require("mongodb");
 const uri ="mongodb://admin:admin@192.168.0.198:27017";
@@ -156,6 +158,7 @@ async function setCar(plate_number){
             }
             result = await collection.updateOne(filter,query);
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
+
       }
 
     } catch (e) {
