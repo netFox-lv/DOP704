@@ -12,7 +12,7 @@ const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
 const { MongoClient } = require("mongodb");
-const uri = "mongodb://mongo:8081/?maxPoolSize=20&w=majority";
+const uri = "mongodb://mongo:27017/?maxPoolSize=20&w=majority";
 const client = new MongoClient(uri);
 
 
@@ -49,9 +49,9 @@ async function getCarNumber(car_image){
     let result ="";
     try {
 
-      const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /images/${car_image}`);
+        const {stdout, stderr} = await exec (`alpr -c eu -p lv -j /images/${car_image}`);
 
-         let tesOut = JSON.parse(stdout.toString());
+        let tesOut = JSON.parse(stdout.toString());
         if (tesOut.results.length >0){
             console.log("[OpenALPR] Result: "+tesOut.results[0].plate);
             result = tesOut.results[0].plate;
@@ -70,7 +70,7 @@ async function getCarNumber(car_image){
 }
 
 function openChannel(file_name){
-    amqp.connect('amqp://192.168.0.192:5672', function(error0, connection) {
+    amqp.connect('amqp://192.168.0.198:5672', function(error0, connection) {
         if (error0) throw error0;
         connection.createChannel(function(error1, channel) {
             if (error1) {
@@ -88,7 +88,7 @@ function openChannel(file_name){
 }
 
 function listRabbitMQ() {
-    amqp.connect('amqp://192.168.0.192:5672', function(error0, connection) {
+    amqp.connect('amqp://192.168.0.198:5672', function(error0, connection) {
         if (error0) throw error0;
         connection.createChannel(function(error1, channel) {
             if (error1) {
