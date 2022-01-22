@@ -11,6 +11,10 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const moment = require('moment');
 
+const { MongoClient } = require("mongodb");
+const uri = "mongodb://admin:admin@192.168.0.192:8081/?maxPoolSize=20&w=majority";
+const client = new MongoClient(uri);
+
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -121,5 +125,14 @@ function listRabbitMQ() {
 
 async function setCar(plate_number){
 
+    try {
+        await client.connect();
+        await client.db("admin").command({ping:1});
+        console.log("[MongoDB] Connected successfully");
+    } catch (e){
+        console.log("[MongoDB] Error:\n"+e);
+    }finally {
+        await client.close();
+    }
 
 }
