@@ -158,7 +158,24 @@ async function setCar(plate_number){
             }
             result = await collection.updateOne(filter,query);
             console.log(`[MongoDB] ${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`);
+            console.log(result)
+            let testAccount = await nodemailer.createTestAccount();
+            let transporter = nodemailer.createTransport({
+                host: "smtp.ethereal.email",
+                port: 587,
+                secure: false, // true for 465, false for other ports
+                auth: {
+                   user: testAccount.user,
+                   pass: testAccount.pass,
+              },
+          });
+          let info = await transporter.sendMail({
+              from: '"Auto Parking" <info@parkinglv.com>', // sender address
+              to: "dop704test@gmail.com", // list of receivers
+              subject: "Parking Latvia ✔", // Subject line
+              text: `Your car - ${plate_number}. Spended time - ${result}`, // plain text body
 
+          });
       }
 
     } catch (e) {
